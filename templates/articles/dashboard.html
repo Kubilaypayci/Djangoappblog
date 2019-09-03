@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class='containers'>
+    <h2>Kontrol Paneli</h2>
+    <hr>
+
+</div>
+{% if articles %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Başlık</th>
+      <th scope="col">Tarih</th>
+      <th scope="col">Ayarlar</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for article in articles %}
+    <tr>
+      <th scope="row">{{article.id}}</th>
+      <td><a href='/gonderi/detay/{{article.id}}'>{{article.title}}</a></td>
+      <td>{{article.created_date}}</td>
+      <td><a class='btn btn-primary' href='{% url "article:update" article.id%}'>Güncelle</a></td>
+      <td><a class='btn btn-danger' href='{% url "article:delete" article.id%}'>Sil</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+    <a class='btn btn-info btn-lg btn-block' href='/gonderi/ekle'>Makale Oluştur</a>
+{% else %}
+
+ <div class='alert alert-danger'>Henüz bir makale oluşturmadınız</div>
+<br>
+   <a class='btn btn-info' href='/gonderi/ekle'>Oluştur</a><br>
+ {% endif %}
+
+{% endblock body %}
